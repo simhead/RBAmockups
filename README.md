@@ -19,7 +19,7 @@ NOTE: 3 & 4 APIs are based on Merchant Warrior API doc and specs are available f
 ### USECASE:
 1.	Get Customer (GET) - extract customer details by customer ID.
 #### Request:
-curl -X GET <tomcat_serverIP>/PaymentServices/GetCustomerServlet?custId=<custId>
+curl -X GET <tomcat_serverIP>/PaymentServices/GetCustomerServlet?custId=&lt;custId&gt;
 #### Response:
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;mwResponse&gt;
