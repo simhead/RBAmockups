@@ -29,6 +29,12 @@
 		<description></description>
 		<servlet-class>rba.mockup.AuthCardServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>QueryCardServlet</servlet-name>
+		<display-name>QueryCardServlet</display-name>
+		<description></description>
+		<servlet-class>rba.mockup.QueryCardServlet</servlet-class>
+	</servlet>
 	
 	<servlet-mapping>
 		<servlet-name>GetCustomerServlet</servlet-name>
@@ -45,6 +51,10 @@
 	<servlet-mapping>
 		<servlet-name>AuthCardServlet</servlet-name>
 		<url-pattern>/AuthCardServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>QueryCardServlet</servlet-name>
+		<url-pattern>/QueryCardServlet</url-pattern>
 	</servlet-mapping>
   
 </web-app>

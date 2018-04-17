@@ -31,16 +31,19 @@ public class UtilSet {
 	 */
 	@SuppressWarnings("unused")
 	public static String getCustomHash(String apiKey, String merchantUUID,
-			String transactionAmount, String transactionCurrency) {
+			String field1, String field2) {
 		byte[] bytesOfMessage;
 		String hashtext = "";
+		String f1="", f2="";
+		if (field1!=null) f1 = field1;
+		if (field2!=null) f2 = field2;
 		
 		try {
 			bytesOfMessage = apiKey.getBytes("UTF-8");
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			byte[] digestApiKey = md.digest(bytesOfMessage);
 			BigInteger bigInt = new BigInteger(1, digestApiKey);
-			String step1text = bigInt.toString(16)+merchantUUID+transactionAmount+transactionCurrency;
+			String step1text = bigInt.toString(16)+merchantUUID+f1+f2;
 			String step2text = step1text.toLowerCase();
 			
 			bytesOfMessage = step2text.getBytes("UTF-8");

@@ -26,10 +26,10 @@ public class Customer {
 		
 		Customer customer = new Customer();
 		customer.createConnection();
-		//customer.createCustomerTable();
+		customer.createCustomerTable();
 		//customer.insertCustomer();
-		customer.getCustomer("01211737627");
-		//customer.shutdown();
+		//customer.getCustomer("01211737627");
+		customer.shutdown();
 
 	}
 
