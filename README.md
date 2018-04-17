@@ -18,9 +18,9 @@ NOTE: 3 & 4 APIs are based on Merchant Warrior API doc and specs are available f
 
 ### USECASE:
 1.	Get Customer (GET) - extract customer details by customer ID.
-###Request:
+#### Request:
 curl -X GET <tomcat_serverIP>/PaymentServices/GetCustomerServlet?custId=<custId>
-###Response:
+#### Response:
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;mwResponse&gt;
     &lt;CUSTID&gt;02291751888&lt;/CUSTID&gt;
@@ -37,7 +37,7 @@ curl -X GET <tomcat_serverIP>/PaymentServices/GetCustomerServlet?custId=<custId>
 &lt;/mwResponse&gt;
 
 2.	Create Customer (POST) - add new customer.
-###Request:
+#### Request:
 curl -X POST \
   -d customerName="customerName" \
   -d customerCountry="customerCountry" \
@@ -50,15 +50,15 @@ curl -X POST \
   -d customerEmail="customerEmail" \
   -d customerIP="customerIP" \
   -d storeID="storeID" <tomcat_serverIP>/PaymentServices/AddCustomerServlet
-###Response:
-<?xml version="1.0" encoding="UTF-8"?>
-<mwResponse>
-    <responseCode>02291751888</responseCode>
-    <responseMessage>Created Successfully for Customer: customerName12345</responseMessage>
-</mwResponse>
+#### Response:
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;mwResponse&gt;
+    &lt;responseCode&gt;02291751888&lt;/responseCode&gt;
+    &lt;responseMessage&gt;Created Successfully for Customer: customerName12345&lt;/responseMessage&gt;
+&lt;/mwResponse&gt;
 
 3.	Process Card (POST) - to perform a purchase request.
-###Request:
+#### Request:
 curl -X POST \ 
     -d method="processCard" \
     -d merchantUUID="5265f8eed6a19" \
@@ -80,50 +80,50 @@ curl -X POST \
     -d paymentCardExpiry="0521" \
     -d paymentCardCSC="123" \
     -d hash="b55552ff426d7e3d4885465d27ea0062" <tomcat_serverIP>/PaymentServices/ProcessCardServlet
-###Response:
-<?xml version="1.0" encoding="UTF-8"?>
-<mwResponse>
-    <responseCode>0</responseCode>
-    <responseMessage>Transaction approved</responseMessage>
-    <transactionID>1336-20be3569-b600-11e6-b9c3-005056b209e0</transactionID>
-    <authCode>731357421</authCode>
-    <receiptNo>731357421</receiptNo>
-    <authMessage>Honour with identification</authMessage>
-    <authResponseCode>08</authResponseCode>
-    <authSettledDate>2018-04-24</authSettledDate>
-    <paymentCardNumber>512345xxxxxx2346</paymentCardNumber>
-    <transactionAmount>1.00</transactionAmount>
-    <custom1></custom1>
-    <custom2></custom2>
-    <custom3></custom3>
-    <customHash>4ffc9271716dc4c016c97df67a4e8072</customHash>
-</mwResponse>
+#### Response:
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;mwResponse&gt;
+    &lt;responseCode&gt;0&lt;/responseCode&gt;
+    &lt;responseMessage&gt;Transaction approved&lt;/responseMessage&gt;
+    &lt;transactionID&gt;1336-20be3569-b600-11e6-b9c3-005056b209e0&lt;/transactionID&gt;
+    &lt;authCode&gt;731357421&lt;/authCode&gt;
+    &lt;receiptNo&gt;731357421&lt;/receiptNo&gt;
+    &lt;authMessage&gt;Honour with identification&lt;/authMessage&gt;
+    &lt;authResponseCode&gt;08&lt;/authResponseCode&gt;
+    &lt;authSettledDate&gt;2018-04-24&lt;/authSettledDate&gt;
+    &lt;paymentCardNumber&gt;512345xxxxxx2346&lt;/paymentCardNumber&gt;
+    &lt;transactionAmount&gt;1.00&lt;/transactionAmount&gt;
+    &lt;custom1&gt;&lt;/custom1&gt;
+    &lt;custom2&gt;&lt;/custom2&gt;
+    &lt;custom3&gt;&lt;/custom3&gt;
+    &lt;customHash&gt;4ffc9271716dc4c016c97df67a4e8072&lt;/customHash&gt;
+&lt;/mwResponse&gt;
 
 4.	Query Card (POST) - to perform a query of an existing transaction.
-###Request:
+#### Request:
 curl -X POST \
   -d method="queryCard" \
   -d merchantUUID="5265f8eed6a19" \
   -d apiKey="ksmnwxab" \
   -d transactionID="1336-20be3569-b600-11e6-b9c3-005056e109e0" \
   -d hash="11b6a860e5bdf0bd91a503b42346ee1d" <tomcat_serverIP>/PaymentServices/QueryCardServlet
-###Response:
-<?xml version="1.0" encoding="UTF-8"?>
-<mwResponse>
-    <responseCode>0</responseCode>
-    <responseMessage>Transaction approved</responseMessage>
-    <transactionID>1336-20be3569-b600-11e6-b9c3-005056e109e0</transactionID>
-    <authCode>731357421</authCode>
-    <receiptNo>731357421</receiptNo>
-    <authMessage>Honour with identification</authMessage>
-    <authResponseCode>08</authResponseCode>
-    <authSettledDate>2018-04-24</authSettledDate>
-    <refundTotal>1.00</refundTotal>
-    <custom1></custom1>
-    <custom2></custom2>
-    <custom3></custom3>
-    <customHash>65295af1a7b667756469a32add723b51</customHash>
-</mwResponse>
+#### Response:
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;mwResponse&gt;
+    &lt;responseCode&gt;0&lt;/responseCode&gt;
+    &lt;responseMessage&gt;Transaction approved&lt;/responseMessage&gt;
+    &lt;transactionID&gt;1336-20be3569-b600-11e6-b9c3-005056e109e0&lt;/transactionID&gt;
+    &lt;authCode&gt;731357421&lt;/authCode&gt;
+    &lt;receiptNo&gt;731357421&lt;/receiptNo&gt;
+    &lt;authMessage&gt;Honour with identification&lt;/authMessage&gt;
+    &lt;authResponseCode&gt;08&lt;/authResponseCode&gt;
+    &lt;authSettledDate&gt;2018-04-24&lt;/authSettledDate&gt;
+    &lt;refundTotal&gt;1.00&lt;/refundTotal&gt;
+    &lt;custom1&gt;&lt;/custom1&gt;
+    &lt;custom2&gt;&lt;/custom2&gt;
+    &lt;custom3&gt;&lt;/custom3&gt;
+    &lt;customHash&gt;65295af1a7b667756469a32add723b51&lt;/customHash&gt;
+&lt;/mwResponse&gt;
 
 ## TODO (Future expansion):
 TBD
