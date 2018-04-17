@@ -1,0 +1,50 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>RBA Payment Services Web Application</display-name>
+  
+	<servlet>
+		<servlet-name>GetCustomerServlet</servlet-name>
+		<display-name>GetCustomerServlet</display-name>
+		<description></description>
+		<servlet-class>rba.mockup.GetCustomerServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>AddCustomerServlet</servlet-name>
+		<display-name>AddCustomerServlet</display-name>
+		<description></description>
+		<servlet-class>rba.mockup.AddCustomerServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ProcessCardServlet</servlet-name>
+		<display-name>ProcessCardServlet</display-name>
+		<description></description>
+		<servlet-class>rba.mockup.ProcessCardServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>AuthCardServlet</servlet-name>
+		<display-name>AuthCardServlet</display-name>
+		<description></description>
+		<servlet-class>rba.mockup.AuthCardServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>GetCustomerServlet</servlet-name>
+		<url-pattern>/GetCustomerServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AddCustomerServlet</servlet-name>
+		<url-pattern>/AddCustomerServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ProcessCardServlet</servlet-name>
+		<url-pattern>/ProcessCardServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AuthCardServlet</servlet-name>
+		<url-pattern>/AuthCardServlet</url-pattern>
+	</servlet-mapping>
+  
+</web-app>
