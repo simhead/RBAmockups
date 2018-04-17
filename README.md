@@ -98,7 +98,7 @@ curl -X POST \
     &lt;custom3&gt;&lt;/custom3&gt;
     &lt;customHash&gt;4ffc9271716dc4c016c97df67a4e8072&lt;/customHash&gt;
 &lt;/mwResponse&gt;
-
+  
 4.	Query Card (POST) - to perform a query of an existing transaction.
 #### Request:
 curl -X POST \
