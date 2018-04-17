@@ -20,7 +20,7 @@ public class GetCustomerServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public GetCustomerServlet() {
+	public GetCustomerServlet() {   
 		super();
 		// TODO Auto-generated constructor stub
 	}
