@@ -18,9 +18,9 @@ NOTE: 3 & 4 APIs are based on Merchant Warrior API doc and specs are available f
 
 ### USECASE:
 1.	Get Customer (GET) - extract customer details by customer ID.
-Request:
+####Request:
 curl -X GET <tomcat_serverIP>/PaymentServices/GetCustomerServlet?custId=<custId>
-Response:
+####Response:
 <?xml version="1.0" encoding="UTF-8"?>
 <mwResponse>
     <CUSTID>02291751888</CUSTID>
@@ -37,7 +37,7 @@ Response:
 </mwResponse>
 
 2.	Create Customer (POST) - add new customer.
-Request:
+####Request:
 curl -X POST \
   -d customerName="customerName" \
   -d customerCountry="customerCountry" \
@@ -50,7 +50,7 @@ curl -X POST \
   -d customerEmail="customerEmail" \
   -d customerIP="customerIP" \
   -d storeID="storeID" <tomcat_serverIP>/PaymentServices/AddCustomerServlet
-Response:
+####Response:
 <?xml version="1.0" encoding="UTF-8"?>
 <mwResponse>
     <responseCode>02291751888</responseCode>
@@ -58,7 +58,7 @@ Response:
 </mwResponse>
 
 3.	Process Card (POST) - to perform a purchase request.
-Request:
+####Request:
 curl -X POST \ 
     -d method="processCard" \
     -d merchantUUID="5265f8eed6a19" \
@@ -80,7 +80,7 @@ curl -X POST \
     -d paymentCardExpiry="0521" \
     -d paymentCardCSC="123" \
     -d hash="b55552ff426d7e3d4885465d27ea0062" <tomcat_serverIP>/PaymentServices/ProcessCardServlet
-Response:
+####Response:
 <?xml version="1.0" encoding="UTF-8"?>
 <mwResponse>
     <responseCode>0</responseCode>
@@ -100,14 +100,14 @@ Response:
 </mwResponse>
 
 4.	Query Card (POST) - to perform a query of an existing transaction.
-Request:
+####Request:
 curl -X POST \
   -d method="queryCard" \
   -d merchantUUID="5265f8eed6a19" \
   -d apiKey="ksmnwxab" \
   -d transactionID="1336-20be3569-b600-11e6-b9c3-005056e109e0" \
   -d hash="11b6a860e5bdf0bd91a503b42346ee1d" <tomcat_serverIP>/PaymentServices/QueryCardServlet
-Response:
+####Response:
 <?xml version="1.0" encoding="UTF-8"?>
 <mwResponse>
     <responseCode>0</responseCode>
