@@ -17,6 +17,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import org.json.JSONObject;
+import org.json.XML;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -83,6 +85,8 @@ public class ProcessCardServlet extends HttpServlet {
 		String paymentCardExpiry = request.getParameter("paymentCardExpiry");
 		String paymentCardCSC = request.getParameter("paymentCardCSC");
 		String hash = request.getParameter("hash");
+		String jsonflag = request.getParameter("jsonflag");
+		if (jsonflag==null) jsonflag = "false";
 
 		// Response handling
 		String responseCode = "0";
@@ -119,8 +123,14 @@ public class ProcessCardServlet extends HttpServlet {
 
 		xml += "</mwResponse>";
 		PrintWriter writer = response.getWriter();
-		response.setContentType("text/xml;charset=UTF-8");
-		writer.write(xml);
+		if (jsonflag.equalsIgnoreCase("true")) {
+			response.setContentType("application/json;charset=UTF-8");
+			JSONObject xmlJSONObj = XML.toJSONObject(xml);
+			writer.write(xmlJSONObj.toString(UtilSet.PRETTY_PRINT_INDENT_FACTOR));
+		} else {
+			response.setContentType("text/xml;charset=UTF-8");
+			writer.write(xml);
+		}
 	}
 
 

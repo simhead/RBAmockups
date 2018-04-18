@@ -10,6 +10,7 @@ import java.util.Date;
 
 public class UtilSet {
 
+	public static int PRETTY_PRINT_INDENT_FACTOR = 4;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 

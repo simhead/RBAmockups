@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+import org.json.XML;
+
 import rba.main.Customer;
 import rba.mockup.util.UtilSet;
 
@@ -55,6 +58,10 @@ public class AddCustomerServlet extends HttpServlet {
 		String customerEmail = request.getParameter("customerEmail");
 		String customerIP = request.getParameter("customerIP");
 		String storeID = request.getParameter("storeID");
+		String jsonflag = request.getParameter("jsonflag");
+		if (jsonflag==null) jsonflag = "false";
+
+		// Response handling
 		Customer customer = new Customer();
 		customer.createConnection();
 		String custId = customer.insertCustomer(customerName, customerCountry, 
@@ -75,8 +82,14 @@ public class AddCustomerServlet extends HttpServlet {
 		if (custId==null) response.setStatus(500);
 		else {
 			PrintWriter writer = response.getWriter();
-			response.setContentType("text/xml;charset=UTF-8");
-			writer.write(xml);
+			if (jsonflag.equalsIgnoreCase("true")) {
+				response.setContentType("application/json;charset=UTF-8");
+				JSONObject xmlJSONObj = XML.toJSONObject(xml);
+				writer.write(xmlJSONObj.toString(UtilSet.PRETTY_PRINT_INDENT_FACTOR));
+			} else {
+				response.setContentType("text/xml;charset=UTF-8");
+				writer.write(xml);
+			}
 		}
 	}
 

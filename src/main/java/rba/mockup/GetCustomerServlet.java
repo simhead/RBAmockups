@@ -8,7 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+import org.json.XML;
+
 import rba.main.Customer;
+import rba.mockup.util.UtilSet;
 
 /**
  * Servlet implementation class CustomerServlet
@@ -34,7 +38,12 @@ public class GetCustomerServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
 
+		// Request handling
 		String custId = request.getParameter("custId");
+		String jsonflag = request.getParameter("jsonflag");
+		if (jsonflag==null) jsonflag = "false";
+		
+		// Response handling
 		Customer customer = new Customer();
 		customer.createConnection();
 		String[] custRec = customer.getCustomer(custId);
@@ -56,8 +65,14 @@ public class GetCustomerServlet extends HttpServlet {
 
 		xml += "</mwResponse>";
 		PrintWriter writer = response.getWriter();
-		response.setContentType("text/xml;charset=UTF-8");
-		writer.write(xml);
+		if (jsonflag.equalsIgnoreCase("true")) {
+			response.setContentType("application/json;charset=UTF-8");
+			JSONObject xmlJSONObj = XML.toJSONObject(xml);
+			writer.write(xmlJSONObj.toString(UtilSet.PRETTY_PRINT_INDENT_FACTOR));
+		} else {
+			response.setContentType("text/xml;charset=UTF-8");
+			writer.write(xml);
+		}
 	}
 
 	/**

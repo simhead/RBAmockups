@@ -20,7 +20,7 @@ NOTE: 3 & 4 APIs are based on Merchant Warrior API doc and specs are available f
 1.	Get Customer (GET) - extract customer details by customer ID.
 #### Request:
 curl -X GET <tomcat_serverIP>/PaymentServices/GetCustomerServlet?custId=&lt;custId&gt;
-#### Response:
+#### Response (XML):
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;mwResponse&gt;
     &lt;CUSTID&gt;02291751888&lt;/CUSTID&gt;
@@ -35,6 +35,22 @@ curl -X GET <tomcat_serverIP>/PaymentServices/GetCustomerServlet?custId=&lt;cust
     &lt;CUSTOMERIP&gt;null&lt;/CUSTOMERIP&gt;
     &lt;STOREID&gt;customerIP12345&lt;/STOREID&gt;
 &lt;/mwResponse&gt;
+#### Response (JSON): add parameter jsonflag=true
+{
+    "mwResponse": {
+        "CUSTOMERSTATE": "customerState12345",
+        "CUSTOMERADDRESS": "customerAddress12345",
+        "CUSTOMERPHONE": "customerPhone12345",
+        "CUSTOMEREMAIL": "customerEmail12345",
+        "CUSTOMERCITY": "customerCity12345",
+        "CUSTID": 10171814974,
+        "CUSTOMERPOSTCODE": "customerPostCode12345",
+        "STOREID": "customerIP12345",
+        "CUSTOMERNAME": "customerName12345",
+        "CUSTOMERCOUNTRY": "customerCountry12345",
+        "CUSTOMERIP": null
+    }
+}
 
 2.	Create Customer (POST) - add new customer.
 #### Request:
@@ -50,12 +66,19 @@ curl -X POST \
   -d customerEmail="customerEmail" \
   -d customerIP="customerIP" \
   -d storeID="storeID" <tomcat_serverIP>/PaymentServices/AddCustomerServlet
-#### Response:
+#### Response (XML):
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;mwResponse&gt;
     &lt;responseCode&gt;02291751888&lt;/responseCode&gt;
     &lt;responseMessage&gt;Created Successfully for Customer: customerName12345&lt;/responseMessage&gt;
 &lt;/mwResponse&gt;
+#### Response (JSON): add parameter jsonflag=true
+{
+    "mwResponse": {
+        "responseMessage": "Created Successfully for Customer: customerName12345",
+        "responseCode": 10201850761
+    }
+}
 
 3.	Process Card (POST) - to perform a purchase request.
 #### Request:
@@ -80,7 +103,7 @@ curl -X POST \
     -d paymentCardExpiry="0521" \
     -d paymentCardCSC="123" \
     -d hash="b55552ff426d7e3d4885465d27ea0062" <tomcat_serverIP>/PaymentServices/ProcessCardServlet
-#### Response:
+#### Response (XML):
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;mwResponse&gt;
     &lt;responseCode&gt;0&lt;/responseCode&gt;
@@ -98,6 +121,25 @@ curl -X POST \
     &lt;custom3&gt;&lt;/custom3&gt;
     &lt;customHash&gt;4ffc9271716dc4c016c97df67a4e8072&lt;/customHash&gt;
 &lt;/mwResponse&gt;
+#### Response (JSON): add parameter jsonflag=true
+{
+    "mwResponse": {
+        "authCode": 731357421,
+        "paymentCardNumber": "512345xxxxxx2346",
+        "authResponseCode": "08",
+        "authMessage": "Honour with identification",
+        "customHash": "4ffc9271716dc4c016c97df67a4e8072",
+        "transactionID": "1336-20be3569-b600-11e6-b9c3-005056b209e0",
+        "responseCode": 0,
+        "authSettledDate": "2018-04-25",
+        "receiptNo": 731357421,
+        "transactionAmount": 1,
+        "custom3": "",
+        "custom1": "",
+        "custom2": "",
+        "responseMessage": "Transaction approved"
+    }
+}
   
 4.	Query Card (POST) - to perform a query of an existing transaction.
 #### Request:
@@ -107,7 +149,7 @@ curl -X POST \
   -d apiKey="ksmnwxab" \
   -d transactionID="1336-20be3569-b600-11e6-b9c3-005056e109e0" \
   -d hash="11b6a860e5bdf0bd91a503b42346ee1d" <tomcat_serverIP>/PaymentServices/QueryCardServlet
-#### Response:
+#### Response (XML):
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;mwResponse&gt;
     &lt;responseCode&gt;0&lt;/responseCode&gt;
@@ -124,6 +166,24 @@ curl -X POST \
     &lt;custom3&gt;&lt;/custom3&gt;
     &lt;customHash&gt;65295af1a7b667756469a32add723b51&lt;/customHash&gt;
 &lt;/mwResponse&gt;
+#### Response (JSON): add parameter jsonflag=true
+{
+    "mwResponse": {
+        "authCode": 731357421,
+        "authResponseCode": "08",
+        "authMessage": "Honour with identification",
+        "refundTotal": 1,
+        "customHash": "65295af1a7b667756469a32add723b51",
+        "transactionID": "1336-20be3569-b600-11e6-b9c3-005056e109e0",
+        "responseCode": 0,
+        "authSettledDate": "2018-04-25",
+        "receiptNo": 731357421,
+        "custom3": "",
+        "custom1": "",
+        "custom2": "",
+        "responseMessage": "Transaction approved"
+    }
+}
 
 ## TODO (Future expansion):
 TBD
