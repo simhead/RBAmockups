@@ -3,8 +3,9 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>RBA Payment Services Web Application</display-name>
-  
+	<display-name>RBA Payment Services Web Application</display-name>
+
+
 	<servlet>
 		<servlet-name>GetCustomerServlet</servlet-name>
 		<display-name>GetCustomerServlet</display-name>
@@ -47,7 +48,13 @@
 		<description></description>
 		<servlet-class>rba.mockup.QueryCardServlet</servlet-class>
 	</servlet>
-	
+	<servlet>
+		<servlet-name>AuthServlet</servlet-name>
+		<display-name>AuthServlet</display-name>
+		<description></description>
+		<servlet-class>rba.mockup.AuthServlet</servlet-class>
+	</servlet>
+
 	<servlet-mapping>
 		<servlet-name>GetCustomerServlet</servlet-name>
 		<url-pattern>/GetCustomerServlet</url-pattern>
@@ -76,5 +83,43 @@
 		<servlet-name>QueryCardServlet</servlet-name>
 		<url-pattern>/QueryCardServlet</url-pattern>
 	</servlet-mapping>
-  
- </web-app>
+
+	<servlet-mapping>
+		<servlet-name>AuthServlet</servlet-name>
+		<url-pattern>/BasicAuth/AuthServlet</url-pattern>
+	</servlet-mapping>
+	
+	<security-constraint>
+		<!-- Specifies the part of the application to be authenticated -->
+		<web-resource-collection>
+			<web-resource-name>Secure Task Services</web-resource-name>
+
+			<!-- Denotes which URI patterns needs to be protected. -->
+			<url-pattern>/BasicAuth/*</url-pattern>
+
+			<!-- Only POST, PUT & DELETE calls are authenticated. Omitting http-method 
+				tag altogether will secure all access to the url-pattern above -->
+			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+			<http-method>PUT</http-method>
+			<http-method>DELETE</http-method>
+		</web-resource-collection>
+
+		<!-- Specifies which roles defined in tomcat-users.xml have access to the 
+			resources. -->
+		<auth-constraint>
+			<role-name>admin</role-name>
+		</auth-constraint>
+
+		<!-- Requests are processed without encryption -->
+		<user-data-constraint>
+			<transport-guarantee>NONE</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+
+	<!-- Denotes the authentication method, which in our case is BASIC -->
+	<login-config>
+		<auth-method>BASIC</auth-method>
+	</login-config>
+
+</web-app>
