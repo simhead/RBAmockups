@@ -2,6 +2,7 @@ package rba.mockup;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,7 +13,7 @@ import org.json.JSONObject;
 import org.json.XML;
 
 import rba.main.Customer;
-import rba.mockup.util.UtilSet;
+import rba.mockup.util.*;
 
 /**
  * Servlet implementation class CustomerServlet
@@ -60,14 +61,15 @@ public class AddCustomerServlet extends HttpServlet {
 		String storeID = request.getParameter("storeID");
 		String jsonflag = request.getParameter("jsonflag");
 		if (jsonflag==null) jsonflag = "false";
-
+		String dbname = request.getParameter("dbname");
+		if (dbname==null) dbname = "/opt/tomcat/MyLocalDerbyDB";
+		
 		// Response handling
-		Customer customer = new Customer();
-		customer.createConnection();
-		String custId = customer.insertCustomer(customerName, customerCountry, 
+		Connection dbconn = Customer.getConnection(dbname);
+		String custId = Customer.insertCustomer(dbconn, customerName, customerCountry, 
 				customerState, customerCity, customerAddress, 
 				customerPostCode, customerPhone, customerEmail, customerIP, storeID);
-		//customer.shutdown();
+		Customer.closeConn(dbconn);
 		
 		// Response handling
 		String responseCode = custId;

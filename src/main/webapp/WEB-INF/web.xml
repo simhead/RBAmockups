@@ -12,6 +12,18 @@
 		<servlet-class>rba.mockup.GetCustomerServlet</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>ListCustomersServlet</servlet-name>
+		<display-name>ListCustomersServlet</display-name>
+		<description></description>
+		<servlet-class>rba.mockup.ListCustomersServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>InitializeDBServlet</servlet-name>
+		<display-name>InitializeDBServlet</display-name>
+		<description></description>
+		<servlet-class>rba.mockup.InitializeDBServlet</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>AddCustomerServlet</servlet-name>
 		<display-name>AddCustomerServlet</display-name>
 		<description></description>
@@ -41,6 +53,14 @@
 		<url-pattern>/GetCustomerServlet</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
+		<servlet-name>ListCustomersServlet</servlet-name>
+		<url-pattern>/ListCustomersServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>InitializeDBServlet</servlet-name>
+		<url-pattern>/InitializeDBServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
 		<servlet-name>AddCustomerServlet</servlet-name>
 		<url-pattern>/AddCustomerServlet</url-pattern>
 	</servlet-mapping>
@@ -57,4 +77,4 @@
 		<url-pattern>/QueryCardServlet</url-pattern>
 	</servlet-mapping>
   
-</web-app>
+ </web-app>

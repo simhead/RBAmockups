@@ -18,14 +18,14 @@ import rba.mockup.util.UtilSet;
 /**
  * Servlet implementation class CustomerServlet
  */
-public class GetCustomerServlet extends HttpServlet {
+public class InitializeDBServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	String xml = "";
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public GetCustomerServlet() {   
+	public InitializeDBServlet() {   
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -40,30 +40,18 @@ public class GetCustomerServlet extends HttpServlet {
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
 
 		// Request handling
-		String custId = request.getParameter("custId");
+		String dbname = request.getParameter("dbname");
 		String jsonflag = request.getParameter("jsonflag");
 		if (jsonflag==null) jsonflag = "false";
-		String dbname = request.getParameter("dbname");
-		if (dbname==null) dbname = "/opt/tomcat/MyLocalDerbyDB";
 		
 		// Response handling
-		Connection dbconn = Customer.getConnection(dbname);
-		String[] custRec = Customer.getCustomer(dbconn, custId);
-		Customer.closeConn(dbconn);
+		Connection conn = Customer.createConnection(dbname);
+		;
 		
 		xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 		xml += "<mwResponse>";
-		xml += "<CUSTID>" + custRec[0] + "</CUSTID>" + 
-			       "<CUSTOMERNAME>" + custRec[1] + "</CUSTOMERNAME>" + 
-			       "<CUSTOMERCOUNTRY>" + custRec[2] + "</CUSTOMERCOUNTRY>" + 
-			       "<CUSTOMERSTATE>" + custRec[3] + "</CUSTOMERSTATE>" + 
-			       "<CUSTOMERCITY>" + custRec[4] + "</CUSTOMERCITY>" + 
-			       "<CUSTOMERADDRESS>" + custRec[5] + "</CUSTOMERADDRESS>" + 
-			       "<CUSTOMERPOSTCODE>" + custRec[6] + "</CUSTOMERPOSTCODE>" + 
-			       "<CUSTOMERPHONE>" + custRec[7] + "</CUSTOMERPHONE>" + 
-			       "<CUSTOMEREMAIL>" + custRec[8] + "</CUSTOMEREMAIL>" + 
-			       "<CUSTOMERIP>" + custRec[9] + "</CUSTOMERIP>" + 
-			       "<STOREID>" + custRec[10] + "</STOREID>";
+		xml += "<Tableflag>" + Customer.createCustomerTable(conn) + "</Tableflag>" + 
+			       "<DBflag>" + Customer.closeConn(conn) + "</DBflag>" ;
 
 		xml += "</mwResponse>";
 		PrintWriter writer = response.getWriter();

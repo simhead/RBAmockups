@@ -2,7 +2,6 @@ package rba.mockup;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,14 +17,14 @@ import rba.mockup.util.UtilSet;
 /**
  * Servlet implementation class CustomerServlet
  */
-public class GetCustomerServlet extends HttpServlet {
+public class ListCustomersServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	String xml = "";
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public GetCustomerServlet() {   
+	public ListCustomersServlet() {   
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -43,13 +42,12 @@ public class GetCustomerServlet extends HttpServlet {
 		String custId = request.getParameter("custId");
 		String jsonflag = request.getParameter("jsonflag");
 		if (jsonflag==null) jsonflag = "false";
-		String dbname = request.getParameter("dbname");
-		if (dbname==null) dbname = "/opt/tomcat/MyLocalDerbyDB";
 		
 		// Response handling
-		Connection dbconn = Customer.getConnection(dbname);
-		String[] custRec = Customer.getCustomer(dbconn, custId);
-		Customer.closeConn(dbconn);
+		Customer customer = new Customer();
+		customer.createConnection();
+		String[] custRec = customer.getCustomer(custId);
+		//customer.shutdown();
 		
 		xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 		xml += "<mwResponse>";
