@@ -64,7 +64,7 @@ public class Customer {
             //Get a connection
             conn = DriverManager.getConnection(dbURL); 
         } catch (Exception except) {
-            except.printStackTrace();
+            except.printStackTrace();  
             return null;
         }
         
